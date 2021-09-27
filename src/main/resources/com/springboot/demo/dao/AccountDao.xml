@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.springboot.demo.dao.AccountDao">
+  <resultMap id="BaseResultMap" type="com.springboot.demo.entity.Account">
+    <id column="card_id" jdbcType="INTEGER" property="cardId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="account_password" jdbcType="VARCHAR" property="accountPassword" />
+    <result column="account_balance" jdbcType="DOUBLE" property="accountBalance" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="is_admin" jdbcType="BOOLEAN" property="isAdmin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    card_id, username, account_password, account_balance, user_id, img, is_admin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_account
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_account
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="card_id" keyProperty="cardId" parameterType="com.springboot.demo.entity.Account" useGeneratedKeys="true">
+    insert into tb_account (username, account_password, account_balance, 
+      user_id, img, is_admin
+      )
+    values (#{username,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR}, #{accountBalance,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{isAdmin,jdbcType=BOOLEAN}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="card_id" keyProperty="cardId" parameterType="com.springboot.demo.entity.Account" useGeneratedKeys="true">
+    insert into tb_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="accountPassword != null">
+        account_password,
+      </if>
+      <if test="accountBalance != null">
+        account_balance,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="isAdmin != null">
+        is_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        #{accountBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        #{isAdmin,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springboot.demo.entity.Account">
+    update tb_account
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        account_balance = #{accountBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        is_admin = #{isAdmin,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springboot.demo.entity.Account">
+    update tb_account
+    set username = #{username,jdbcType=VARCHAR},
+      account_password = #{accountPassword,jdbcType=VARCHAR},
+      account_balance = #{accountBalance,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      is_admin = #{isAdmin,jdbcType=BOOLEAN}
+    where card_id = #{cardId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,30 @@
+user:
+  name: zhangsan
+  age: 18
+
+account:
+  cardId: 2001
+  username: jack
+  accountPassword: 123123
+
+
+countries:
+  - cn
+  - usa
+  - jp
+  - uk
+  - fr
+  - de
+  - ss
+mybatis:
+  mapper-locations: classpath:com/springboot/demo/dao/AccountDao.xml
+  map-underscore-to-camel-case: true
+
+Spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///testsql?serverTimezone=UTC
+    username: root
+    password: 7901
+    type: com.alibaba.druid.pool.DruidDataSource
+
